@@ -1,0 +1,26 @@
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    env_file:
+      - ./server/.env
+    ports:
+      - '4000:4000'
+    networks:
+      - message-app-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    env_file:
+      - ./client/.env
+    ports:
+      - "3006:80"
+    networks:
+      - message-app-network
+
+networks:
+  message-app-network:
+    driver: bridge
